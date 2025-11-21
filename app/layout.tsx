@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,8 +26,10 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
+        <Toaster />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
