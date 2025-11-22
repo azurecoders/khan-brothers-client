@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -6,17 +6,18 @@ import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
+    { href: "/products", label: "Products" },
     { href: "/projects", label: "Projects" },
     { href: "/contact", label: "Contact" },
   ];
 
-  const isActive = (path: string) => pathname === path
+  const isActive = (path: string) => pathname === path;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,7 +29,8 @@ const Navbar = () => {
               <Phone className="h-3 w-3" /> {"+92 321 8980284, +92 305 2498416"}
             </span>
             <span className="flex items-center gap-2">
-              <Mail className="h-3 w-3" /> {"khanbrothers.engsolution@gmail.com"}
+              <Mail className="h-3 w-3" />{" "}
+              {"khanbrothers.engsolution@gmail.com"}
             </span>
           </div>
         </div>
@@ -39,7 +41,11 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer">
-            <img src={"/KhanBrother_Logo.jpeg"} alt="KB Logo" className="h-10 w-10 object-contain rounded-sm" />
+            <img
+              src={"/KhanBrother_Logo.jpeg"}
+              alt="KB Logo"
+              className="h-10 w-10 object-contain rounded-sm"
+            />
             <div className="flex flex-col">
               <span className="font-heading font-bold text-xl leading-tight text-primary tracking-tight">
                 KHAN BROTHERS
@@ -56,8 +62,11 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
               <span
-                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-secondary after:transition-all ${isActive(link.href) ? "text-primary font-bold after:w-full" : "text-foreground/80"
-                  }`}
+                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-secondary after:transition-all ${
+                  isActive(link.href)
+                    ? "text-primary font-bold after:w-full"
+                    : "text-foreground/80"
+                }`}
               >
                 {link.label}
               </span>
@@ -88,8 +97,11 @@ const Navbar = () => {
               <Link key={link.href} href={link.href}>
                 <span
                   onClick={() => setIsOpen(false)}
-                  className={`text-sm font-medium block py-2 ${isActive(link.href) ? "text-primary font-bold" : "text-foreground/80"
-                    }`}
+                  className={`text-sm font-medium block py-2 ${
+                    isActive(link.href)
+                      ? "text-primary font-bold"
+                      : "text-foreground/80"
+                  }`}
                 >
                   {link.label}
                 </span>
@@ -105,6 +117,6 @@ const Navbar = () => {
       )}
     </header>
   );
-}
+};
 
 export default Navbar;
