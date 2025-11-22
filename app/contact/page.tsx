@@ -4,10 +4,10 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 const COMPANY_INFO = {
-  address: '123 Engineering Avenue, Industrial District, City, Country',
-  phone: '+1 (555) 123-4567',
-  supportPhone: '+1 (555) 987-6543',
-  email: 'info@khanbrothers.com',
+  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajjo Town, Manzsoor Colony, Near Ghusia Masjid, Karachi East.',
+  phone: '+92 321 8980284',
+  supportPhone: '+92 305 2498416',
+  email: 'khanbrothers.engsolution@gmail.com',
   supportEmail: 'support@khanbrothers.com',
   workingHours: {
     weekday: 'Mon - Fri: 9:00 AM - 6:00 PM',
@@ -184,7 +184,7 @@ export default function Contact() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="John Doe"
+                        placeholder="Your name"
                         className={`w-full h-12 px-4 bg-gray-50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ${errors.name ? 'border-destructive' : ''}`}
                       />
                       {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
@@ -196,7 +196,7 @@ export default function Contact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+1 234 567 890"
+                        placeholder="e.g. +92 300 1234567"
                         className={`w-full h-12 px-4 bg-gray-50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ${errors.phone ? 'border-destructive' : ''}`}
                       />
                       {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
@@ -211,7 +211,7 @@ export default function Contact() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="john@example.com"
+                        placeholder="Email address"
                         className={`w-full h-12 px-4 bg-gray-50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ${errors.email ? 'border-destructive' : ''}`}
                       />
                       {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
@@ -236,7 +236,7 @@ export default function Contact() {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your project requirements..."
+                      placeholder="Please tell us a bit about what you’re looking for..."
                       className={`w-full min-h-[150px] px-4 py-3 bg-gray-50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring resize-y ${errors.message ? 'border-destructive' : ''}`}
                     />
                     {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}

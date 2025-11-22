@@ -25,10 +25,10 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center text-xs font-medium">
           <div className="flex gap-6">
             <span className="flex items-center gap-2">
-              <Phone className="h-3 w-3" /> {"+1 (555) 123-4567"}
+              <Phone className="h-3 w-3" /> {"+92 321 8980284, +92 305 2498416"}
             </span>
             <span className="flex items-center gap-2">
-              <Mail className="h-3 w-3" /> {"info@khanbrothers.com"}
+              <Mail className="h-3 w-3" /> {"khanbrothers.engsolution@gmail.com"}
             </span>
           </div>
         </div>
@@ -39,7 +39,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer">
-            <img src={"/logo.png"} alt="KB Logo" className="h-10 w-10 object-contain rounded-sm" />
+            <img src={"/KhanBrother_Logo.jpeg"} alt="KB Logo" className="h-10 w-10 object-contain rounded-sm" />
             <div className="flex flex-col">
               <span className="font-heading font-bold text-xl leading-tight text-primary tracking-tight">
                 KHAN BROTHERS
