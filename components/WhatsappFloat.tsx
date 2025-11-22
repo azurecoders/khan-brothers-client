@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppFloat = () => {
   const handleClick = () => {
-    const whatsappUrl = "https://wa.me/923007600733";
+    const whatsappUrl = "https://wa.me/923218980284";
     window.open(whatsappUrl, "_blank");
   };
 
