@@ -26,7 +26,7 @@ const Products = () => {
           description:
             "High-capacity transformers for industrial applications, 100KVA to 5000KVA.",
           image:
-            "https://media.istockphoto.com/id/1350021370/photo/electrician-in-bucket-of-articulated-boom-lift-is-repairing-electrical-transmission-on-power.jpg?s=612x612&w=0&k=20&c=LsNrz_zNtjTCDA-_PpjoWeuDnr9rL7NwRWsvA-1dIpo=",
+            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop&q=80",
           features: ["CE Certified", "Energy Efficient", "Long Lifespan"],
         },
         {
@@ -44,7 +44,7 @@ const Products = () => {
           description:
             "Premium quality cables for overhead, underground, and industrial installations.",
           image:
-            "https://media.istockphoto.com/id/1150199550/photo/electrician-engineer-work-tester-measuring-voltage-and-current-of-power-electric-line-in.jpg?s=612x612&w=0&k=20&c=5CE_v-zKa9tHncUdONL1jZ_HfCqNakyID8uGYXYU19A=",
+            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
           features: ["Fire Resistant", "ISO Certified", "Various Sizes"],
         },
         {
@@ -53,7 +53,7 @@ const Products = () => {
           description:
             "Reliable backup power solutions from 10KVA to 1000KVA capacity.",
           image:
-            "https://sparcobiz.com/assets/images/ups-meta.jpg",
+            "https://images.unsplash.com/photo-1625521224880-7d7e513f353a?w=800&auto=format&fit=crop&q=80",
           features: ["Automatic Start", "Fuel Efficient", "Silent Operation"],
         },
       ],
@@ -69,7 +69,7 @@ const Products = () => {
           description:
             "High-efficiency monocrystalline and polycrystalline solar panels, 300W-550W.",
           image:
-            "https://c8.alamy.com/comp/2WY8WC4/indian-workers-installing-solar-panels-on-roof-of-house-maintenance-of-photovoltaic-panel-system-concept-of-alternative-renewable-energy-2WY8WC4.jpg",
+            "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop&q=80",
           features: [
             "25-Year Warranty",
             "High Efficiency",
@@ -82,7 +82,7 @@ const Products = () => {
           description:
             "On-grid and hybrid inverters with MPPT technology for maximum power output.",
           image:
-            "https://www.aforenergy.com/wp-content/uploads/2025/09/6.webp",
+            "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?w=800&auto=format&fit=crop&q=80",
           features: ["MPPT Technology", "Smart Monitoring", "Grid Compatible"],
         },
         {
@@ -91,7 +91,7 @@ const Products = () => {
           description:
             "Deep cycle batteries and lithium-ion storage solutions for reliable backup.",
           image:
-            "https://static.pakwheels.com/2011/01/ups1.jpg",
+            "https://images.unsplash.com/photo-1626908013351-800ddd734b8a?w=800&auto=format&fit=crop&q=80",
           features: ["Long Cycle Life", "Fast Charging", "Maintenance Free"],
         },
         {
@@ -100,7 +100,7 @@ const Products = () => {
           description:
             "Durable aluminum and galvanized steel mounting systems for all roof types.",
           image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR39giWkCh1Kwmm-AC0wEcoQRr-OgfbqxXiXg&s",
+            "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&auto=format&fit=crop&q=80",
           features: ["Corrosion Resistant", "Easy Installation", "Wind Rated"],
         },
       ],
@@ -134,7 +134,7 @@ const Products = () => {
           description:
             "Professional server racks and network cabinets with cable management.",
           image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRNprEQ-LJSNhhXx_YX8Z4abcr3q-LrunLA&s",
+            "https://images.unsplash.com/photo-1558494949-ef010cbdcc27?w=800&auto=format&fit=crop&q=80",
           features: ["Various Sizes", "Cooling Options", "Lockable Design"],
         },
         {
@@ -159,7 +159,7 @@ const Products = () => {
           description:
             "HD and 4K IP cameras with night vision and motion detection capabilities.",
           image:
-            "https://s3.ap-south-1.amazonaws.com/brandbuddiez.com//89/img/product/48/682//STI-VFB50IRM-1080PCS.webp",
+            "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&auto=format&fit=crop&q=80",
           features: ["4K Resolution", "Night Vision", "Weatherproof"],
         },
         {
@@ -168,7 +168,7 @@ const Products = () => {
           description:
             "Network and digital video recorders with cloud backup support.",
           image:
-            "https://blog.promallshop.com/wp-content/uploads/2025/04/DVR_vs_NVR_horizontal-2-1024x822.jpg",
+            "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&auto=format&fit=crop&q=80",
           features: ["Multi-Channel", "Remote Access", "Cloud Backup"],
         },
         {
@@ -177,7 +177,7 @@ const Products = () => {
           description:
             "Biometric and card-based access control for secure entry management.",
           image:
-            "https://media.istockphoto.com/id/969328162/photo/electronic-door-control-device.jpg?s=612x612&w=0&k=20&c=xYU8k6YerMLSkifxn-L-vSS_498uLBXUnTYB8_jtrRE=",
+            "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=80",
           features: ["Biometric Options", "Multi-User", "Audit Trail"],
         },
         {
@@ -186,7 +186,7 @@ const Products = () => {
           description:
             "IP-based intercom and telephone exchange systems for seamless communication.",
           image:
-            "https://cdn.prod.website-files.com/5b6df8bb681f89c158b48f6b/5d67cfb8c9639dfd68a4bc11_pbx-technician.jpg",
+            "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&auto=format&fit=crop&q=80",
           features: ["IP Compatible", "Multi-Line", "Video Support"],
         },
       ],
@@ -424,5 +424,4 @@ const Products = () => {
     </section>
   );
 };
-
 export default Products;

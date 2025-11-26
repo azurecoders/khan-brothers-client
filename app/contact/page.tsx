@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 const COMPANY_INFO = {
-  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajjo Town, Manzsoor Colony, Near Ghusia Masjid, Karachi East.',
+  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajjo Town, Manzsoor Colony, Near Ghusia Masjid, Karachi.',
   phone: '+92 321 8980284',
   supportPhone: '+92 305 2498416',
   email: 'khanbrothers.engsolution@gmail.com',
@@ -140,7 +140,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-primary mb-1">Phone Number</h3>
                     <p className="text-sm text-muted-foreground">{COMPANY_INFO.phone}</p>
-                    <p className="text-sm text-muted-foreground">{COMPANY_INFO.supportPhone} (Support)</p>
+                    <p className="text-sm text-muted-foreground">{COMPANY_INFO.supportPhone}</p>
                   </div>
                 </div>
 
@@ -152,7 +152,6 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-primary mb-1">Email Address</h3>
                     <p className="text-sm text-muted-foreground">{COMPANY_INFO.email}</p>
-                    <p className="text-sm text-muted-foreground">{COMPANY_INFO.supportEmail}</p>
                   </div>
                 </div>
 

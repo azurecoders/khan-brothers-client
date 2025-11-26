@@ -13,7 +13,7 @@ export default function About() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">About Us</h1>
           <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-            Building a legacy of trust and engineering excellence since 1995.
+            Building a legacy of trust and engineering excellence since 2025.
           </p>
         </div>
       </div>
@@ -25,10 +25,10 @@ export default function About() {
             <div>
               <h2 className="text-3xl font-heading font-bold text-primary mb-6">Company Overview</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Khan Brothers Engineering & Solutions is a multi-disciplinary engineering company committed to delivering high-quality solutions in the fields of electrical, construction, solar energy, and IT infrastructure.
+                Khan Brothers is a dedicated and renowned company specializing in electrical solutions and services. With a proven track record of excellence in the field, we have established ourselves as a trusted partner for all your electrical needs. Our unwavering commitment to quality and innovation sets us apart in the industry. Based on a foundation of expertise and technical proficiency, Khan Brothers is your go-to source for a wide range of electrical services and solutions. From design and installation to maintenance and optimization, we are here to meet all your electrical requirements. At Khan Brothers, our focus is exclusively on the electrical domain. We bring a wealth of knowledge and experience to every project, ensuring that your electrical systems operate efficiently and reliably. Our team of skilled professionals is well-versed in the latest industry standards and practices, making us the ideal choice for your electrical projects.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                With over three decades of experience, we have established ourselves as a reliable partner for industrial, commercial, and residential projects. Our strength lies in our ability to handle complex challenges with precision, safety, and innovation.
+                We understand the critical role that electrical systems play in today’s world, whether in commercial, industrial, or residential settings. That’s why we are committed to delivering top-notch electrical solutions that not only meet but exceed your expectations. When you partner with Khan Brothers, you can be confident in the reliability and safety of your electrical infrastructure.  Our comprehensive range of electrical services covers everything from wiring, lighting, and power distribution to advanced automation and energy-efficient solutions. We are dedicated to providing innovative and sustainable electrical systems that not only enhance functionality but also reduce energy consumption and operational costs. Khan Brothers takes pride in its commitment to excellence, adherence to industry regulations, and the assurance of safety and reliability. When you choose us as your electrical partner, you're making a choice for quality, professionalism, and peace of mind.
               </p>
             </div>
           </div>
