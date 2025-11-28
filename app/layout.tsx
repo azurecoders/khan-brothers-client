@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import ApolloProviderComponent from "@/components/ApolloProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,10 +27,12 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        <Toaster />
-        <Navbar />
-        {children}
-        <Footer />
+        <ApolloProviderComponent>
+          <Toaster />
+          <Navbar />
+          {children}
+          <Footer />
+        </ApolloProviderComponent>
       </body>
     </html>
   );

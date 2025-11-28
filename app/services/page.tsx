@@ -1,65 +1,33 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { useQuery } from "@apollo/client/react";
+import { FETCH_ALL_SERVICES } from "@/graphql/services";
 import heroImage from "../../assets/hero-image.png";
 
-const INITIAL_SERVICES = [
-  {
-    id: "1",
-    title: "Electrical Solutions",
-    description:
-      "Comprehensive industrial, commercial, and residential electrical installations, maintenance, and load analysis.",
-    icon: "Zap",
-    image:
-      "https://www.csmechanical.co/wp-content/uploads/2023/03/Electrical-CS-Mechanical.jpeg",
-  },
-  {
-    id: "2",
-    title: "Solar Energy Systems",
-    description:
-      "Turnkey solar solutions including on-grid, off-grid, and hybrid systems for sustainable energy.",
-    icon: "Sun",
-    image:
-      "https://www.powerinfotoday.com/wp-content/uploads/solar-energy/7786/India_solar_power_generation.jpg",
-  },
-  {
-    id: "3",
-    title: "IT & Networking",
-    description:
-      "Advanced networking, structured cabling, server setups, and IT infrastructure design.",
-    icon: "Server",
-    image:
-      "https://polytechnic.purdue.edu/sites/default/files/lab-photos/electronics-2-lab-featured.jpg",
-  },
-  {
-    id: "4",
-    title: "Construction Services",
-    description:
-      "Civil works, interior renovation, and structural engineering for modern infrastructure.",
-    icon: "HardHat",
-    image:
-      "https://allaboutbahriatown.com/wp-content/uploads/2023/09/Civil-Work-Services-in-Bahria-Town-Karachi.jpg",
-  },
-  {
-    id: "5",
-    title: "CCTV & Security",
-    description:
-      "State-of-the-art surveillance and access control systems for enhanced security.",
-    icon: "ShieldCheck",
-    image:
-      "https://img.freepik.com/premium-photo/close-up-male-technician-fixing-cctv-camera-wall_46370-421.jpg",
-  },
-  {
-    id: "6",
-    title: "Mechanical & Plumbing",
-    description:
-      "Expert mechanical installations and plumbing system designs for commercial facilities.",
-    icon: "Wrench",
-    image:
-      "https://static.vecteezy.com/system/resources/thumbnails/024/636/442/small/plumber-installing-bathroom-water-supply-photo.jpeg",
-  },
-];
+interface SubService {
+  id: string;
+  name: string;
+  serviceId: string;
+}
+
+interface Service {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  subServices: SubService[];
+}
+
+// Fallback image if service has no icon
+const FALLBACK_IMAGE = "/placeholder-service.jpg";
 
 export default function Services() {
+  const { data, loading, error } = useQuery(FETCH_ALL_SERVICES);
+
+  const services: Service[] = data?.fetchAllServices || [];
+
   return (
     <>
       {/* Page Header */}
@@ -86,37 +54,82 @@ export default function Services() {
 
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {INITIAL_SERVICES.map((service) => {
-              return (
+          {/* Loading State */}
+          {loading && (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+              <span className="ml-4 text-lg text-gray-600">
+                Loading services...
+              </span>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="text-center py-20">
+              <p className="text-red-600 text-lg">
+                Failed to load services. Please try again later.
+              </p>
+            </div>
+          )}
+
+          {/* Services Grid */}
+          {!loading && !error && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service) => (
                 <div
                   key={service.id}
                   className="bg-white rounded-lg shadow-md flex flex-col overflow-hidden"
                 >
-                  <div>
+                  <div className="relative h-[300px]">
                     <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={1080}
-                      height={1920}
-                      className="object-cover h-[300px]"
+                      src={service.icon || FALLBACK_IMAGE}
+                      alt={service.name}
+                      width={1920}
+                      height={1080}
+                      className="object-cover"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-lg font-bold text-primary">
-                      {service.title}
+                      {service.name}
                     </h3>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-muted-foreground text-sm flex-1">
                       {service.description}
                     </p>
-                    <button className="mt-4 flex items-center gap-2 text-secondary">
-                      Learn More <ArrowRight size={18} />
-                    </button>
+
+                    {/* Sub Services */}
+                    {service.subServices.length > 0 && (
+                      <div className="mt-4">
+                        <div className="flex flex-wrap gap-2">
+                          {service.subServices.slice(0, 3).map((sub) => (
+                            <span
+                              key={sub.id}
+                              className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                            >
+                              {sub.name}
+                            </span>
+                          ))}
+                          {service.subServices.length > 3 && (
+                            <span className="text-xs text-gray-500">
+                              +{service.subServices.length - 3} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && services.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-gray-600 text-lg">No services available.</p>
+            </div>
+          )}
         </div>
       </section>
 
