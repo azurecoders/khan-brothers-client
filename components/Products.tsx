@@ -1,294 +1,67 @@
+"use client";
+
 import {
   ShoppingCart,
   Package,
   Zap,
   Sun,
   Server,
-  Cable,
   Shield,
   Wrench,
-  CheckCircle2,
   ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery } from "@apollo/client/react";
+import { FETCH_ALL_PRODUCTS } from "@/graphql/product";
+import { useMemo } from "react";
+
+interface ProductImage {
+  id: string;
+  imageId: string;
+  imageUrl: string;
+  productId: string;
+}
+
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: string | null;
+  category: string;
+  images: ProductImage[];
+}
+
+// Category icons mapping
+const CATEGORY_ICONS: { [key: string]: any } = {
+  "Electrical Equipment": Zap,
+  "Solar Products": Sun,
+  "Networking & IT Hardware": Server,
+  "Security Systems": Shield,
+  "Plumbing Materials": Wrench,
+  "Construction Materials": Package,
+};
 
 const Products = () => {
-  const PRODUCT_CATEGORIES = [
-    {
-      id: "1",
-      category: "Electrical Equipment",
-      icon: "Zap",
-      products: [
-        {
-          id: "elec-1",
-          name: "Industrial Transformers",
-          description:
-            "High-capacity transformers for industrial applications, 100KVA to 5000KVA.",
-          image:
-            "https://media.istockphoto.com/id/1350021370/photo/electrician-in-bucket-of-articulated-boom-lift-is-repairing-electrical-transmission-on-power.jpg?s=612x612&w=0&k=20&c=LsNrz_zNtjTCDA-_PpjoWeuDnr9rL7NwRWsvA-1dIpo=",
-          features: ["CE Certified", "Energy Efficient", "Long Lifespan"],
-        },
-        {
-          id: "elec-2",
-          name: "HT/LT Control Panels",
-          description:
-            "Customized control panels with advanced protection and monitoring systems.",
-          image:
-            "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&auto=format&fit=crop&q=80",
-          features: ["Custom Design", "Safety Features", "Quality Assured"],
-        },
-        {
-          id: "elec-3",
-          name: "Cable & Wiring Solutions",
-          description:
-            "Premium quality cables for overhead, underground, and industrial installations.",
-          image:
-            "https://media.istockphoto.com/id/1150199550/photo/electrician-engineer-work-tester-measuring-voltage-and-current-of-power-electric-line-in.jpg?s=612x612&w=0&k=20&c=5CE_v-zKa9tHncUdONL1jZ_HfCqNakyID8uGYXYU19A=",
-          features: ["Fire Resistant", "ISO Certified", "Various Sizes"],
-        },
-        {
-          id: "elec-4",
-          name: "Generator & UPS Systems",
-          description:
-            "Reliable backup power solutions from 10KVA to 1000KVA capacity.",
-          image:
-            "https://sparcobiz.com/assets/images/ups-meta.jpg",
-          features: ["Automatic Start", "Fuel Efficient", "Silent Operation"],
-        },
-      ],
-    },
-    {
-      id: "2",
-      category: "Solar Products",
-      icon: "Sun",
-      products: [
-        {
-          id: "solar-1",
-          name: "Solar PV Panels",
-          description:
-            "High-efficiency monocrystalline and polycrystalline solar panels, 300W-550W.",
-          image:
-            "https://c8.alamy.com/comp/2WY8WC4/indian-workers-installing-solar-panels-on-roof-of-house-maintenance-of-photovoltaic-panel-system-concept-of-alternative-renewable-energy-2WY8WC4.jpg",
-          features: [
-            "25-Year Warranty",
-            "High Efficiency",
-            "Weather Resistant",
-          ],
-        },
-        {
-          id: "solar-2",
-          name: "Solar Inverters",
-          description:
-            "On-grid and hybrid inverters with MPPT technology for maximum power output.",
-          image:
-            "https://www.aforenergy.com/wp-content/uploads/2025/09/6.webp",
-          features: ["MPPT Technology", "Smart Monitoring", "Grid Compatible"],
-        },
-        {
-          id: "solar-3",
-          name: "Solar Battery Systems",
-          description:
-            "Deep cycle batteries and lithium-ion storage solutions for reliable backup.",
-          image:
-            "https://static.pakwheels.com/2011/01/ups1.jpg",
-          features: ["Long Cycle Life", "Fast Charging", "Maintenance Free"],
-        },
-        {
-          id: "solar-4",
-          name: "Solar Mounting Structures",
-          description:
-            "Durable aluminum and galvanized steel mounting systems for all roof types.",
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR39giWkCh1Kwmm-AC0wEcoQRr-OgfbqxXiXg&s",
-          features: ["Corrosion Resistant", "Easy Installation", "Wind Rated"],
-        },
-      ],
-    },
-    {
-      id: "3",
-      category: "Networking & IT Hardware",
-      icon: "Server",
-      products: [
-        {
-          id: "it-1",
-          name: "Network Switches & Routers",
-          description:
-            "Enterprise-grade switches and routers for robust network infrastructure.",
-          image:
-            "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop&q=80",
-          features: ["Gigabit Speed", "PoE Support", "Managed/Unmanaged"],
-        },
-        {
-          id: "it-2",
-          name: "Fiber Optic Cables",
-          description:
-            "Single-mode and multi-mode fiber optic cables for high-speed data transmission.",
-          image:
-            "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80",
-          features: ["High Bandwidth", "Long Distance", "Low Latency"],
-        },
-        {
-          id: "it-3",
-          name: "Server Racks & Cabinets",
-          description:
-            "Professional server racks and network cabinets with cable management.",
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRNprEQ-LJSNhhXx_YX8Z4abcr3q-LrunLA&s",
-          features: ["Various Sizes", "Cooling Options", "Lockable Design"],
-        },
-        {
-          id: "it-4",
-          name: "Network Cabling Solutions",
-          description:
-            "Cat6, Cat6a, and Cat7 structured cabling for modern network installations.",
-          image:
-            "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=800&auto=format&fit=crop&q=80",
-          features: ["High Speed", "Shielded/Unshielded", "Certified Quality"],
-        },
-      ],
-    },
-    {
-      id: "4",
-      category: "Security Systems",
-      icon: "Shield",
-      products: [
-        {
-          id: "sec-1",
-          name: "IP CCTV Cameras",
-          description:
-            "HD and 4K IP cameras with night vision and motion detection capabilities.",
-          image:
-            "https://s3.ap-south-1.amazonaws.com/brandbuddiez.com//89/img/product/48/682//STI-VFB50IRM-1080PCS.webp",
-          features: ["4K Resolution", "Night Vision", "Weatherproof"],
-        },
-        {
-          id: "sec-2",
-          name: "NVR & DVR Systems",
-          description:
-            "Network and digital video recorders with cloud backup support.",
-          image:
-            "https://blog.promallshop.com/wp-content/uploads/2025/04/DVR_vs_NVR_horizontal-2-1024x822.jpg",
-          features: ["Multi-Channel", "Remote Access", "Cloud Backup"],
-        },
-        {
-          id: "sec-3",
-          name: "Access Control Systems",
-          description:
-            "Biometric and card-based access control for secure entry management.",
-          image:
-            "https://media.istockphoto.com/id/969328162/photo/electronic-door-control-device.jpg?s=612x612&w=0&k=20&c=xYU8k6YerMLSkifxn-L-vSS_498uLBXUnTYB8_jtrRE=",
-          features: ["Biometric Options", "Multi-User", "Audit Trail"],
-        },
-        {
-          id: "sec-4",
-          name: "Intercom & PBX Systems",
-          description:
-            "IP-based intercom and telephone exchange systems for seamless communication.",
-          image:
-            "https://cdn.prod.website-files.com/5b6df8bb681f89c158b48f6b/5d67cfb8c9639dfd68a4bc11_pbx-technician.jpg",
-          features: ["IP Compatible", "Multi-Line", "Video Support"],
-        },
-      ],
-    },
-    {
-      id: "5",
-      category: "Plumbing Materials",
-      icon: "Wrench",
-      products: [
-        {
-          id: "plumb-1",
-          name: "Industrial Pumps",
-          description:
-            "Submersible and centrifugal pumps for water supply and drainage systems.",
-          image:
-            "https://images.unsplash.com/photo-1581092918484-8313e1f6d5e9?w=800&auto=format&fit=crop&q=80",
-          features: ["High Capacity", "Energy Efficient", "Durable Build"],
-        },
-        {
-          id: "plumb-2",
-          name: "PVC & CPVC Piping",
-          description:
-            "Premium quality pipes and fittings for water supply and drainage.",
-          image:
-            "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&auto=format&fit=crop&q=80",
-          features: ["Chemical Resistant", "Long Lasting", "Easy Installation"],
-        },
-        {
-          id: "plumb-3",
-          name: "Water Tanks & Storage",
-          description:
-            "Polyethylene and stainless steel water storage tanks in various capacities.",
-          image:
-            "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&auto=format&fit=crop&q=80",
-          features: ["UV Resistant", "Food Grade", "Various Sizes"],
-        },
-        {
-          id: "plumb-4",
-          name: "Bathroom & Kitchen Fixtures",
-          description:
-            "Modern fixtures including faucets, sinks, and sanitary ware.",
-          image:
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop&q=80",
-          features: ["Modern Design", "Water Saving", "Corrosion Proof"],
-        },
-      ],
-    },
-    {
-      id: "6",
-      category: "Construction Materials",
-      icon: "Package",
-      products: [
-        {
-          id: "const-1",
-          name: "Steel & Reinforcement",
-          description:
-            "High-grade steel bars, beams, and reinforcement materials for construction.",
-          image:
-            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80",
-          features: ["High Strength", "IS Standard", "Corrosion Resistant"],
-        },
-        {
-          id: "const-2",
-          name: "Cement & Concrete",
-          description:
-            "Premium quality cement and ready-mix concrete for structural applications.",
-          image:
-            "https://images.unsplash.com/photo-1581092160562-40aa08e78840?w=800&auto=format&fit=crop&q=80",
-          features: ["OPC & PPC", "Quick Setting", "High Durability"],
-        },
-        {
-          id: "const-3",
-          name: "Tiles & Flooring",
-          description:
-            "Ceramic, porcelain, and vitrified tiles for floors and walls.",
-          image:
-            "https://images.unsplash.com/photo-1615873968403-89e068629265?w=800&auto=format&fit=crop&q=80",
-          features: ["Slip Resistant", "Various Designs", "Easy Maintenance"],
-        },
-        {
-          id: "const-4",
-          name: "Paint & Coatings",
-          description:
-            "Industrial and decorative paints with weather-resistant properties.",
-          image:
-            "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=80",
-          features: ["Washable", "Eco-Friendly", "Long Lasting"],
-        },
-      ],
-    },
-  ];
+  const { data, loading, error } = useQuery(FETCH_ALL_PRODUCTS);
 
-  const getIconComponent = (iconName: string) => {
-    const icons: { [key: string]: any } = {
-      Zap: Zap,
-      Sun: Sun,
-      Server: Server,
-      Shield: Shield,
-      Wrench: Wrench,
-      Package: Package,
-    };
-    const IconComponent = icons[iconName] || Package;
+  const products: Product[] = data?.fetchAllProducts || [];
+
+  // Group products by category
+  const productsByCategory = useMemo(() => {
+    const grouped: { [key: string]: Product[] } = {};
+    products.forEach((product) => {
+      if (!grouped[product.category]) {
+        grouped[product.category] = [];
+      }
+      grouped[product.category].push(product);
+    });
+    return grouped;
+  }, [products]);
+
+  // Get icon component for a category
+  const getIconComponent = (categoryName: string) => {
+    const IconComponent = CATEGORY_ICONS[categoryName] || Package;
     return <IconComponent className="h-6 w-6" />;
   };
 
@@ -310,91 +83,145 @@ const Products = () => {
           </p>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <span className="ml-4 text-lg text-gray-600">
+              Loading products...
+            </span>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-red-600 text-lg">
+              Failed to load products. Please try again later.
+            </p>
+          </div>
+        )}
+
         {/* Product Categories */}
-        <div className="space-y-20">
-          {PRODUCT_CATEGORIES.map((category, categoryIndex) => (
-            <div key={category.id}>
-              {/* Category Header */}
-              <div className="flex items-center gap-4 mb-8">
-                <div className="bg-secondary/10 text-secondary p-3 rounded-lg">
-                  {getIconComponent(category.icon)}
-                </div>
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary">
-                    {category.category}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {category.products.length} products available
-                  </p>
-                </div>
-              </div>
-
-              {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {category.products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
-                  >
-                    {/* Product Image */}
-                    <div className="relative h-[220px] overflow-hidden">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        width={800}
-                        height={600}
-                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute top-3 right-3 bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase">
-                        In Stock
-                      </div>
+        {!loading && !error && products.length > 0 && (
+          <div className="space-y-20">
+            {Object.entries(productsByCategory).map(
+              ([category, categoryProducts]) => (
+                <div key={category}>
+                  {/* Category Header */}
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="bg-secondary/10 text-secondary p-3 rounded-lg">
+                      {getIconComponent(category)}
                     </div>
-
-                    {/* Product Content */}
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h4 className="text-lg font-bold text-primary mb-2 line-clamp-1">
-                        {product.name}
-                      </h4>
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2 flex-grow">
-                        {product.description}
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary">
+                        {category}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        {categoryProducts.length} product
+                        {categoryProducts.length !== 1 ? "s" : ""} available
                       </p>
+                    </div>
+                  </div>
 
-                      {/* Features */}
-                      <div className="space-y-2 mb-4">
-                        {product.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" />
-                            <span className="text-xs text-foreground">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
+                  {/* Products Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {categoryProducts.slice(0, 4).map((product) => (
+                      <div
+                        key={product.id}
+                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                      >
+                        {/* Product Image */}
+                        <div className="relative h-[220px] overflow-hidden">
+                          {product.images.length > 0 ? (
+                            <Image
+                              src={product.images[0].imageUrl}
+                              alt={product.title}
+                              width={800}
+                              height={600}
+                              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                              <Package size={48} className="text-gray-400" />
+                            </div>
+                          )}
+                          {/* Price Badge */}
+                          {product.price && (
+                            <div className="absolute top-3 right-3 bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">
+                              PKR {product.price}
+                            </div>
+                          )}
+                          {/* Image count badge */}
+                          {product.images.length > 1 && (
+                            <div className="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                              +{product.images.length - 1} photos
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Product Content */}
+                        <div className="p-6 flex flex-col flex-grow">
+                          <h4 className="text-lg font-bold text-primary mb-2 line-clamp-1">
+                            {product.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-grow">
+                            {product.description}
+                          </p>
+
+                          {/* CTA Button */}
+                          <Link href="/contact">
+                            <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-4 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                              <ShoppingCart className="h-4 w-4" />
+                              Request Quote
+                            </button>
+                          </Link>
+                        </div>
                       </div>
+                    ))}
+                  </div>
 
-                      {/* CTA Button */}
-                      <Link href="/contact">
-                        <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-4 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer">
-                          <ShoppingCart className="h-4 w-4" />
-                          Request Quote
+                  {/* View All Button for Category */}
+                  {categoryProducts.length > 4 && (
+                    <div className="text-center mt-8">
+                      <Link href="/products">
+                        <button className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded-md transition-all flex items-center gap-2 mx-auto cursor-pointer">
+                          View All {category}
+                          <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        )}
 
-              {/* View All Button for Category */}
-              <div className="text-center mt-8">
-                <Link href="/contact">
-                  <button className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded-md transition-all flex items-center gap-2 mx-auto cursor-pointer">
-                    View All {category.category}
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Empty State */}
+        {!loading && !error && products.length === 0 && (
+          <div className="text-center py-20">
+            <Package size={64} className="mx-auto text-gray-300 mb-4" />
+            <p className="text-gray-600 text-lg">
+              No products available at the moment.
+            </p>
+            <p className="text-gray-500 mt-2">
+              Please check back later or contact us for inquiries.
+            </p>
+          </div>
+        )}
+
+        {/* View All Products Button */}
+        {!loading && !error && products.length > 0 && (
+          <div className="text-center mt-12">
+            <Link href="/products">
+              <button className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-md transition-colors flex items-center gap-2 mx-auto">
+                View All Products
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </Link>
+          </div>
+        )}
 
         {/* Bottom CTA Section */}
         <div className="mt-20 bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-8 md:p-12 text-center text-white">

@@ -1,89 +1,36 @@
 "use client";
+
 import { useState } from "react";
-import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Star, User } from "lucide-react";
 import Image from "next/image";
+import { useQuery } from "@apollo/client/react";
+import { FETCH_ALL_TESTIMONIALS } from "@/graphql/testimonials";
+
+interface Testimonial {
+  id: string;
+  name: string;
+  designation: string;
+  message: string;
+}
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const TESTIMONIALS = [
-    {
-      id: "1",
-      name: "Ahmed Malik",
-      position: "CEO, TechVision Industries",
-      company: "Manufacturing Sector",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "Khan Brothers transformed our entire electrical infrastructure with precision and attention to detail. Their team demonstrated exceptional technical prowess and completed our 500KVA installation ahead of schedule. The level of professionalism and commitment to excellence truly sets them apart.",
-      project: "Industrial Electrical Installation",
-    },
-    {
-      id: "2",
-      name: "Sarah Khan",
-      position: "Operations Director",
-      company: "Textile Manufacturing Ltd.",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "We engaged Khan Brothers for a complete solar energy solution for our manufacturing facility. Their innovative approach and technical expertise resulted in a 60% reduction in our energy costs. The project was delivered on time with exceptional quality standards.",
-      project: "500KW Solar Installation",
-    },
-    {
-      id: "3",
-      name: "Muhammad Raza",
-      position: "IT Manager",
-      company: "Financial Services Group",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "Their networking and IT infrastructure services are world-class. Khan Brothers implemented our entire data center setup with fiber optics and structured cabling. The reliability and professionalism they brought to the project was outstanding.",
-      project: "Data Center Infrastructure",
-    },
-    {
-      id: "4",
-      name: "Fatima Ahmed",
-      position: "Facility Manager",
-      company: "Healthcare Center",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "We needed a comprehensive security and surveillance system for our healthcare facility. Khan Brothers delivered an integrated CCTV and access control solution that exceeded our expectations. Their after-sales support has been exemplary.",
-      project: "Security Systems Integration",
-    },
-    {
-      id: "5",
-      name: "Imran Siddiqui",
-      position: "Project Director",
-      company: "Real Estate Development",
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "From electrical design to execution, Khan Brothers handled our commercial complex project with remarkable efficiency. Their problem-solving skills and adaptability to changing requirements made them an invaluable partner throughout the construction phase.",
-      project: "Commercial Complex Development",
-    },
-    {
-      id: "6",
-      name: "Ayesha Noor",
-      position: "Plant Manager",
-      company: "Food Processing Industry",
-      image:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&auto=format&fit=crop&q=80",
-      rating: 5,
-      text: "Their expertise in industrial electrical systems and automation is unmatched. Khan Brothers installed our complete production line electrical infrastructure with zero downtime during commissioning. A truly customer-centric and proactive team.",
-      project: "Industrial Automation & Electrical",
-    },
-  ];
+  const { data, loading, error } = useQuery(FETCH_ALL_TESTIMONIALS);
+
+  const testimonials: Testimonial[] = data?.fetchAllTestimonials || [];
 
   const nextTestimonial = () => {
+    if (testimonials.length === 0) return;
     setCurrentIndex((prevIndex) =>
-      prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevTestimonial = () => {
+    if (testimonials.length === 0) return;
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? TESTIMONIALS.length - 1 : prevIndex - 1
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
   };
 
@@ -91,7 +38,17 @@ const Testimonials = () => {
     setCurrentIndex(index);
   };
 
-  const currentTestimonial = TESTIMONIALS[currentIndex];
+  const currentTestimonial = testimonials[currentIndex];
+
+  // Get initials for avatar
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <section className="py-20 bg-slate-50">
@@ -110,99 +67,123 @@ const Testimonials = () => {
           </p>
         </div>
 
-        {/* Main Testimonial Card */}
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative">
-            {/* Quote Icon */}
-            <div className="absolute -top-6 left-8 bg-secondary text-white p-4 rounded-full shadow-lg">
-              <Quote className="h-8 w-8" />
-            </div>
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <span className="ml-4 text-lg text-gray-600">
+              Loading testimonials...
+            </span>
+          </div>
+        )}
 
-            {/* Testimonial Content */}
-            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mt-6">
-              {/* Client Image */}
-              <div className="flex-shrink-0">
-                <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-secondary/20">
-                  <Image
-                    src={currentTestimonial.image}
-                    alt={currentTestimonial.name}
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-red-600 text-lg">
+              Failed to load testimonials. Please try again later.
+            </p>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && !error && testimonials.length === 0 && (
+          <div className="text-center py-20">
+            <Quote size={64} className="mx-auto text-gray-300 mb-4" />
+            <p className="text-gray-600 text-lg">
+              No testimonials available at the moment.
+            </p>
+          </div>
+        )}
+
+        {/* Main Testimonial Card */}
+        {!loading && !error && testimonials.length > 0 && currentTestimonial && (
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative">
+              {/* Quote Icon */}
+              <div className="absolute -top-6 left-8 bg-secondary text-white p-4 rounded-full shadow-lg">
+                <Quote className="h-8 w-8" />
               </div>
 
-              {/* Text Content */}
-              <div className="flex-1 text-center md:text-left">
-                {/* Rating Stars */}
-                <div className="flex gap-1 justify-center md:justify-start mb-4">
-                  {[...Array(currentTestimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 fill-secondary text-secondary"
-                    />
-                  ))}
+              {/* Testimonial Content */}
+              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mt-6">
+                {/* Client Avatar */}
+                <div className="flex-shrink-0">
+                  <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-secondary/20 bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <span className="text-white text-2xl md:text-3xl font-bold">
+                      {getInitials(currentTestimonial.name)}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Testimonial Text */}
-                <p className="text-foreground text-lg leading-relaxed mb-6 italic">
-                  "{currentTestimonial.text}"
-                </p>
+                {/* Text Content */}
+                <div className="flex-1 text-center md:text-left">
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 justify-center md:justify-start mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-5 w-5 fill-secondary text-secondary"
+                      />
+                    ))}
+                  </div>
 
-                {/* Client Info */}
-                <div className="space-y-1">
-                  <h4 className="text-xl font-bold text-primary font-heading">
-                    {currentTestimonial.name}
-                  </h4>
-                  <p className="text-secondary font-semibold">
-                    {currentTestimonial.position}
+                  {/* Testimonial Text */}
+                  <p className="text-foreground text-lg leading-relaxed mb-6 italic">
+                    "{currentTestimonial.message}"
                   </p>
-                  <p className="text-muted-foreground text-sm">
-                    {currentTestimonial.company}
-                  </p>
-                  <div className="inline-block mt-2 px-4 py-1 bg-secondary/10 text-secondary text-xs font-medium rounded-full">
-                    Project: {currentTestimonial.project}
+
+                  {/* Client Info */}
+                  <div className="space-y-1">
+                    <h4 className="text-xl font-bold text-primary font-heading">
+                      {currentTestimonial.name}
+                    </h4>
+                    <p className="text-secondary font-semibold">
+                      {currentTestimonial.designation}
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/* Navigation Arrows */}
+              {testimonials.length > 1 && (
+                <div className="flex gap-4 justify-center md:justify-end mt-8">
+                  <button
+                    onClick={prevTestimonial}
+                    className="bg-primary hover:bg-primary/90 text-white p-3 rounded-full transition-colors shadow-md"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={nextTestimonial}
+                    className="bg-primary hover:bg-primary/90 text-white p-3 rounded-full transition-colors shadow-md"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* Navigation Arrows */}
-            <div className="flex gap-4 justify-center md:justify-end mt-8">
-              <button
-                onClick={prevTestimonial}
-                className="bg-primary hover:bg-primary/90 text-white p-3 rounded-full transition-colors shadow-md"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={nextTestimonial}
-                className="bg-primary hover:bg-primary/90 text-white p-3 rounded-full transition-colors shadow-md"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Dots Navigation */}
+            {testimonials.length > 1 && (
+              <div className="flex gap-2 justify-center mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToTestimonial(index)}
+                    className={`transition-all ${index === currentIndex
+                        ? "bg-secondary w-8 h-3"
+                        : "bg-gray-300 hover:bg-gray-400 w-3 h-3"
+                      } rounded-full`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Dots Navigation */}
-          <div className="flex gap-2 justify-center mt-8">
-            {TESTIMONIALS.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToTestimonial(index)}
-                className={`transition-all ${
-                  index === currentIndex
-                    ? "bg-secondary w-8 h-3"
-                    : "bg-gray-300 hover:bg-gray-400 w-3 h-3"
-                } rounded-full`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">

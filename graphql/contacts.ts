@@ -12,18 +12,6 @@ export const FETCH_ALL_CONTACTS = gql`
   }
 `;
 
-export const FETCH_SINGLE_CONTACT = gql`
-  query FetchSingleContact($id: ID!) {
-    fetchSingleContact(id: $id) {
-      id
-      name
-      email
-      message
-      phone
-    }
-  }
-`;
-
 export const CREATE_CONTACT = gql`
   mutation CreateContact(
     $name: String!
@@ -41,6 +29,18 @@ export const CREATE_CONTACT = gql`
       email
       phone
       message
+    }
+  }
+`;
+
+export const FETCH_SINGLE_CONTACT = gql`
+  query FetchSingleContact($id: ID!) {
+    fetchSingleContact(id: $id) {
+      id
+      name
+      email
+      message
+      phone
     }
   }
 `;

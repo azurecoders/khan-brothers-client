@@ -14,9 +14,9 @@ export default function Home() {
       <WhatsAppFloat />
       <Hero />
       <Services />
+      <About />
       <Products />
       <Projects />
-      <About />
       <Testimonials />
       <Stats />
       <CTA />

@@ -120,7 +120,7 @@ export default function Contact() {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
 
       {/* Page Header */}
       <div className="bg-primary py-16 text-center text-white">
