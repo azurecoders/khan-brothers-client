@@ -13,6 +13,7 @@ interface Project {
   location: string;
   imageUrl: string;
   imageId: string;
+  category: string; // Added category support
 }
 
 const Projects = () => {
@@ -70,6 +71,14 @@ const Projects = () => {
               >
                 {/* Project Image */}
                 <div className="relative h-64 overflow-hidden">
+
+                  {/* Category Badge */}
+                  {project.category && (
+                    <span className="absolute top-3 left-3 z-10 bg-primary text-white text-xs px-3 py-1 rounded-full shadow">
+                      {project.category}
+                    </span>
+                  )}
+
                   {project.imageUrl ? (
                     <Image
                       src={project.imageUrl}
@@ -104,7 +113,7 @@ const Projects = () => {
                   </p>
 
                   {/* View Details Button */}
-                  <Link href="/projects">
+                  <Link href={`/projects`}>
                     <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-4 rounded-md transition-colors mt-auto">
                       View Project Details
                     </button>
@@ -147,8 +156,7 @@ const Projects = () => {
               Ready to Start Your Next Project?
             </h3>
             <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
-              Let's discuss how we can bring your vision to life with our
-              engineering expertise and proven track record.
+              {"Let's discuss how we can bring your vision to life with our engineering expertise and proven track record."}
             </p>
             <Link href="/contact">
               <button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold h-12 px-8 rounded-md cursor-pointer transition-colors">

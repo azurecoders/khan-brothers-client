@@ -1,3 +1,4 @@
+// graphql/services.ts
 import { gql } from "@apollo/client";
 
 export const FETCH_ALL_SERVICES = gql`
@@ -6,6 +7,7 @@ export const FETCH_ALL_SERVICES = gql`
       id
       name
       description
+      category
       icon
       subServices {
         id
@@ -20,18 +22,21 @@ export const CREATE_SERVICE = gql`
   mutation CreateService(
     $name: String!
     $description: String!
+    $category: String!
     $icon: Upload!
     $subServices: [String!]
   ) {
     createService(
       name: $name
       description: $description
+      category: $category
       icon: $icon
       subServices: $subServices
     ) {
       id
       name
       description
+      category
       icon
       subServices {
         id
@@ -47,6 +52,7 @@ export const UPDATE_SERVICE = gql`
     $id: ID!
     $name: String
     $description: String
+    $category: String
     $icon: Upload
     $subServices: [String!]
   ) {
@@ -54,12 +60,14 @@ export const UPDATE_SERVICE = gql`
       id: $id
       name: $name
       description: $description
+      category: $category
       icon: $icon
       subServices: $subServices
     ) {
       id
       name
       description
+      category
       icon
       subServices {
         id

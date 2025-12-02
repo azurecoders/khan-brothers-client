@@ -9,6 +9,7 @@ export const FETCH_ALL_PROJECTS = gql`
       location
       imageUrl
       imageId
+      category
     }
   }
 `;
@@ -22,6 +23,7 @@ export const FETCH_SINGLE_PROJECT = gql`
       location
       imageUrl
       imageId
+      category
     }
   }
 `;
@@ -31,12 +33,14 @@ export const CREATE_PROJECT = gql`
     $title: String!
     $description: String!
     $location: String!
+    $category: String!
     $image: Upload!
   ) {
     createProject(
       title: $title
       description: $description
       location: $location
+      category: $category
       image: $image
     ) {
       id
@@ -45,6 +49,7 @@ export const CREATE_PROJECT = gql`
       location
       imageUrl
       imageId
+      category
     }
   }
 `;
@@ -55,6 +60,7 @@ export const UPDATE_PROJECT = gql`
     $title: String
     $description: String
     $location: String
+    $category: String
     $image: Upload
   ) {
     updateProject(
@@ -62,6 +68,7 @@ export const UPDATE_PROJECT = gql`
       title: $title
       description: $description
       location: $location
+      category: $category
       image: $image
     ) {
       id
@@ -70,12 +77,7 @@ export const UPDATE_PROJECT = gql`
       location
       imageUrl
       imageId
+      category
     }
-  }
-`;
-
-export const DELETE_PROJECT = gql`
-  mutation DeleteProject($id: ID!) {
-    deleteProject(id: $id)
   }
 `;

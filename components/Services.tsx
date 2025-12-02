@@ -1,3 +1,4 @@
+// components/Services.tsx (Homepage Section)
 "use client";
 
 import { ArrowRight, Zap } from "lucide-react";
@@ -5,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@apollo/client/react";
 import { FETCH_ALL_SERVICES } from "@/graphql/services";
+import { useState, useMemo } from "react";
 
 interface SubService {
   id: string;
@@ -16,6 +18,7 @@ interface Service {
   id: string;
   name: string;
   description: string;
+  category: string;
   icon: string;
   subServices: SubService[];
 }
@@ -24,13 +27,28 @@ const FALLBACK_IMAGE = "/placeholder-service.jpg";
 
 const Services = () => {
   const { data, loading, error } = useQuery(FETCH_ALL_SERVICES);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const services: Service[] = data?.fetchAllServices || [];
+
+  // Get unique categories
+  const categories = useMemo(() => {
+    const uniqueCategories = new Set(
+      services.map((s) => s.category).filter(Boolean)
+    );
+    return Array.from(uniqueCategories).sort();
+  }, [services]);
+
+  // Filter services by category
+  const filteredServices = useMemo(() => {
+    if (selectedCategory === "all") return services;
+    return services.filter((s) => s.category === selectedCategory);
+  }, [services, selectedCategory]);
 
   return (
     <section className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-4">
             Our Expertise
           </h2>
@@ -59,10 +77,37 @@ const Services = () => {
           </div>
         )}
 
+        {/* Category Filter */}
+        {!loading && !error && services.length > 0 && categories.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <button
+              onClick={() => setSelectedCategory("all")}
+              className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${selectedCategory === "all"
+                  ? "bg-primary text-white shadow-lg shadow-primary/30"
+                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                }`}
+            >
+              All Services
+            </button>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${selectedCategory === category
+                    ? "bg-primary text-white shadow-lg shadow-primary/30"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                  }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Services Grid */}
-        {!loading && !error && services.length > 0 && (
+        {!loading && !error && filteredServices.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => (
+            {filteredServices.map((service) => (
               <div
                 key={service.id}
                 className="bg-white rounded-lg shadow-md flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300"
@@ -79,6 +124,14 @@ const Services = () => {
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                       <Zap size={48} className="text-gray-400" />
+                    </div>
+                  )}
+                  {/* Category Badge */}
+                  {service.category && (
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-primary/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
+                        {service.category}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -123,12 +176,22 @@ const Services = () => {
         )}
 
         {/* Empty State */}
-        {!loading && !error && services.length === 0 && (
+        {!loading && !error && filteredServices.length === 0 && (
           <div className="text-center py-20">
             <Zap size={64} className="mx-auto text-gray-300 mb-4" />
             <p className="text-gray-600 text-lg">
-              No services available at the moment.
+              {selectedCategory === "all"
+                ? "No services available at the moment."
+                : `No services found in "${selectedCategory}" category.`}
             </p>
+            {selectedCategory !== "all" && (
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className="mt-4 text-primary hover:underline font-medium"
+              >
+                View all services
+              </button>
+            )}
           </div>
         )}
 
