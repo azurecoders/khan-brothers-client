@@ -8,6 +8,9 @@ import heroImage from "../../assets/hero-image.png";
 import { useState, useMemo } from "react";
 import { Filter, X } from "lucide-react";
 
+// Note: For client components, metadata should be in a separate layout.tsx or use generateMetadata
+// Moving SEO metadata to a wrapper or using next/head for dynamic pages
+
 interface SubService {
   id: string;
   name: string;
@@ -130,15 +133,15 @@ export default function Services() {
                     <button
                       onClick={() => setSelectedCategory("all")}
                       className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between ${selectedCategory === "all"
-                          ? "bg-primary text-white"
-                          : "bg-gray-50 hover:bg-gray-100 text-gray-700"
+                        ? "bg-primary text-white"
+                        : "bg-gray-50 hover:bg-gray-100 text-gray-700"
                         }`}
                     >
                       <span className="font-medium">All Services</span>
                       <span
                         className={`text-sm px-2 py-0.5 rounded-full ${selectedCategory === "all"
-                            ? "bg-white/20"
-                            : "bg-gray-200"
+                          ? "bg-white/20"
+                          : "bg-gray-200"
                           }`}
                       >
                         {services.length}
@@ -150,15 +153,15 @@ export default function Services() {
                         key={category.name}
                         onClick={() => setSelectedCategory(category.name)}
                         className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between ${selectedCategory === category.name
-                            ? "bg-primary text-white"
-                            : "bg-gray-50 hover:bg-gray-100 text-gray-700"
+                          ? "bg-primary text-white"
+                          : "bg-gray-50 hover:bg-gray-100 text-gray-700"
                           }`}
                       >
                         <span className="font-medium">{category.name}</span>
                         <span
                           className={`text-sm px-2 py-0.5 rounded-full ${selectedCategory === category.name
-                              ? "bg-white/20"
-                              : "bg-gray-200"
+                            ? "bg-white/20"
+                            : "bg-gray-200"
                             }`}
                         >
                           {category.count}
@@ -210,15 +213,15 @@ export default function Services() {
                           setShowMobileFilter(false);
                         }}
                         className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between ${selectedCategory === "all"
-                            ? "bg-primary text-white"
-                            : "bg-gray-50 text-gray-700"
+                          ? "bg-primary text-white"
+                          : "bg-gray-50 text-gray-700"
                           }`}
                       >
                         <span className="font-medium">All Services</span>
                         <span
                           className={`text-sm px-2 py-0.5 rounded-full ${selectedCategory === "all"
-                              ? "bg-white/20"
-                              : "bg-gray-200"
+                            ? "bg-white/20"
+                            : "bg-gray-200"
                             }`}
                         >
                           {services.length}
@@ -233,15 +236,15 @@ export default function Services() {
                             setShowMobileFilter(false);
                           }}
                           className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between ${selectedCategory === category.name
-                              ? "bg-primary text-white"
-                              : "bg-gray-50 text-gray-700"
+                            ? "bg-primary text-white"
+                            : "bg-gray-50 text-gray-700"
                             }`}
                         >
                           <span className="font-medium">{category.name}</span>
                           <span
                             className={`text-sm px-2 py-0.5 rounded-full ${selectedCategory === category.name
-                                ? "bg-white/20"
-                                : "bg-gray-200"
+                              ? "bg-white/20"
+                              : "bg-gray-200"
                               }`}
                           >
                             {category.count}

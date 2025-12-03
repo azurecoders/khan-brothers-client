@@ -1,6 +1,39 @@
 import { CheckCircle2, Target, Lightbulb, Shield, Users, Award, TargetIcon } from "lucide-react";
 import heroImage from "../../assets/hero-image.png";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us - Company Overview, Mission & Vision",
+  description:
+    "Learn about Khan Brothers Engineering & Solutions - a trusted electrical and engineering company in Karachi, Pakistan. Discover our mission, vision, core values, and commitment to quality engineering excellence since 2025.",
+  keywords: [
+    "about Khan Brothers Engineering",
+    "engineering company Karachi",
+    "electrical solutions company",
+    "trusted engineering partner Pakistan",
+    "company overview",
+    "mission vision values",
+  ],
+  openGraph: {
+    title: "About Khan Brothers Engineering & Solutions",
+    description:
+      "Building a legacy of trust and engineering excellence. Learn about our mission, vision, and commitment to quality.",
+    url: "https://kbengsolutions.com/about",
+    type: "website",
+    images: [
+      {
+        url: "/og-about.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Khan Brothers Engineering",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://kbengsolutions.com/about",
+  },
+};
 
 export default function About() {
   return (
