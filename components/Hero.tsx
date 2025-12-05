@@ -31,7 +31,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link href="/contact">
               <button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold h-14 px-8 text-lg rounded-md cursor-pointer">
-                Request a Quote
+                Contact Us
               </button>
             </Link>
             <Link href="/projects">

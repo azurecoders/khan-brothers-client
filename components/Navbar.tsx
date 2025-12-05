@@ -74,7 +74,7 @@ const Navbar = () => {
           ))}
           <Link href="/contact">
             <button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-2 px-4 rounded-sm transition-colors cursor-pointer">
-              Get a Quote
+              Contact Us
             </button>
           </Link>
         </nav>
