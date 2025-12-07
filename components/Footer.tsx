@@ -17,11 +17,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <img
-                src={"/KhanBrother_Logo.jpeg"}
+                src={"/logo.jpeg"}
                 width={500}
                 height={500}
                 alt="KB Logo"
-                className="h-8 w-8 object-contain bg-white rounded-sm p-0.5"
+                className="h-20 w-auto object-contain bg-white rounded-sm p-0.5"
               />
               <span className="font-heading font-bold text-lg tracking-tight">
                 KHAN BROTHERS
@@ -111,9 +111,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                 <span>
-                  Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan
-                  Road, Jonajjo Town, Manzsoor Colony, Near Ghusia Masjid,
-                  Karachi
+                  Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -126,7 +124,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-secondary shrink-0" />
-                <span>khanbrothers.engsolution@gmail.com</span>
+                <span>info@kbengsolutions.com</span>
               </li>
             </ul>
             <div className="flex gap-4 mt-6">

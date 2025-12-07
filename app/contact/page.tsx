@@ -6,10 +6,10 @@ import { useMutation } from '@apollo/client/react';
 import { CREATE_CONTACT } from '@/graphql/contacts';
 
 const COMPANY_INFO = {
-  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajoo Town, Manzsoor Colony, Near Ghusia Masjid, Karachi.',
+  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid, Karachi.',
   phone: '+92 321 8980284',
   supportPhone: '+92 305 2498416',
-  email: 'khanbrothers.engsolution@gmail.com',
+  email: 'info@kbengsolutions.com',
   supportEmail: 'support@khanbrothers.com',
   workingHours: {
     weekday: 'Mon - Fri: 9:00 AM - 6:00 PM',
@@ -291,7 +291,7 @@ export default function Contact() {
       </section>
 
       {/* Map */}
-      <section className="h-[400px] w-full bg-gray-200 flex items-center justify-center">
+      {/* <section className="h-[400px] w-full bg-gray-200 flex items-center justify-center">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.983683832555!2d67.06669008515998!3d24.83023158962548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33c6a69860f87%3A0xeee0a9eca585f0ec!2sUniversal%20Cables%20Industries%20Ltd!5e0!3m2!1sen!2s!4v1763733124168!5m2!1sen!2s"
           width="100%"
@@ -301,7 +301,7 @@ export default function Contact() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-      </section>
+      </section> */}
     </>
   );
 }

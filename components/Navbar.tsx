@@ -30,7 +30,7 @@ const Navbar = () => {
             </span>
             <span className="flex items-center gap-2">
               <Mail className="h-3 w-3" />{" "}
-              {"khanbrothers.engsolution@gmail.com"}
+              {"info@kbengsolutions.com"}
             </span>
           </div>
         </div>
@@ -42,15 +42,15 @@ const Navbar = () => {
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer">
             <img
-              src={"/KhanBrother_Logo.jpeg"}
+              src={"/logo.jpeg"}
               alt="KB Logo"
-              className="h-10 w-10 object-contain rounded-sm"
+              className="h-16 w-auto object-contain rounded-sm"
             />
             <div className="flex flex-col">
               <span className="font-heading font-bold text-xl leading-tight text-primary tracking-tight">
                 KHAN BROTHERS
               </span>
-              <span className="text-[10px] text-muted-foreground tracking-wider uppercase font-medium">
+              <span className="text-xs text-orange-600 uppercase tracking-widest font-semibold">
                 Engineering & Solutions
               </span>
             </div>
@@ -62,11 +62,10 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
               <span
-                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-secondary after:transition-all ${
-                  isActive(link.href)
-                    ? "text-primary font-bold after:w-full"
-                    : "text-foreground/80"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-secondary after:transition-all ${isActive(link.href)
+                  ? "text-primary font-bold after:w-full"
+                  : "text-foreground/80"
+                  }`}
               >
                 {link.label}
               </span>
@@ -97,11 +96,10 @@ const Navbar = () => {
               <Link key={link.href} href={link.href}>
                 <span
                   onClick={() => setIsOpen(false)}
-                  className={`text-sm font-medium block py-2 ${
-                    isActive(link.href)
-                      ? "text-primary font-bold"
-                      : "text-foreground/80"
-                  }`}
+                  className={`text-sm font-medium block py-2 ${isActive(link.href)
+                    ? "text-primary font-bold"
+                    : "text-foreground/80"
+                    }`}
                 >
                   {link.label}
                 </span>

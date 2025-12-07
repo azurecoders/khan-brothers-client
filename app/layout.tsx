@@ -149,7 +149,7 @@ const jsonLd = {
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/logo.png`,
+        url: `${SITE_URL}/logo.jpeg`,
         width: 500,
         height: 500,
       },
@@ -159,7 +159,7 @@ const jsonLd = {
       address: {
         "@type": "PostalAddress",
         streetAddress:
-          "Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajoo Town, Manzsoor Colony, Near Ghusia Masjid",
+          "Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid",
         addressLocality: "Karachi",
         addressRegion: "Sindh",
         postalCode: "75850",
@@ -181,7 +181,7 @@ const jsonLd = {
           availableLanguage: ["English", "Urdu"],
         },
       ],
-      email: "khanbrothers.engsolution@gmail.com",
+      email: "info@kbengsolutions.com",
       sameAs: [
         "https://www.facebook.com/khanbrotherseng",
         "https://www.linkedin.com/company/khanbrotherseng",
@@ -200,11 +200,11 @@ const jsonLd = {
       image: `${SITE_URL}/og-image.jpg`,
       url: SITE_URL,
       telephone: "+92-321-8980284",
-      email: "khanbrothers.engsolution@gmail.com",
+      email: "info@kbengsolutions.com",
       address: {
         "@type": "PostalAddress",
         streetAddress:
-          "Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajoo Town, Manzsoor Colony, Near Ghusia Masjid",
+          "Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid",
         addressLocality: "Karachi",
         addressRegion: "Sindh",
         postalCode: "75850",
