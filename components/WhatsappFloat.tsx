@@ -10,7 +10,7 @@ const WhatsAppFloat = () => {
 
   return (
     <Link
-      href={`https://wa.me/923218980284?text=${message}`}
+      href={`https://wa.me/923052498416?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
