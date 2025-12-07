@@ -149,14 +149,6 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Khan Brothers Engineering &
             Solutions. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <span className="hover:text-white cursor-pointer">
-              Privacy Policy
-            </span>
-            <span className="hover:text-white cursor-pointer">
-              Terms of Service
-            </span>
-          </div>
         </div>
       </div>
     </footer>
