@@ -291,9 +291,9 @@ export default function Contact() {
       </section>
 
       {/* Map */}
-      {/* <section className="h-[400px] w-full bg-gray-200 flex items-center justify-center">
+      <section className="h-[400px] w-full bg-gray-200 flex items-center justify-center">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.983683832555!2d67.06669008515998!3d24.83023158962548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33c6a69860f87%3A0xeee0a9eca585f0ec!2sUniversal%20Cables%20Industries%20Ltd!5e0!3m2!1sen!2s!4v1763733124168!5m2!1sen!2s"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5910067809987!2d67.07514811113566!3d24.843656677848298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d4e0e146353%3A0xb8c5705120bcc45d!2sKhan%20Brothers%20Engineering%20and%20Solutions!5e0!3m2!1sen!2s!4v1765398174111!5m2!1sen!2s"
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -301,7 +301,7 @@ export default function Contact() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-      </section> */}
+      </section>
     </>
   );
 }
