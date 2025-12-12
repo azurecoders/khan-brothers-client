@@ -1,10 +1,10 @@
 import {
-  Facebook,
-  Linkedin,
+  ArrowRight,
+  Instagram,
+  Mail,
   MapPin,
   Phone,
-  Mail,
-  ArrowRight,
+  Youtube
 } from "lucide-react";
 import Link from "next/link";
 
@@ -111,7 +111,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                 <span>
-                  Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid
+                  Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghausia Masjid, Karachi, Pakistan
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -129,16 +129,16 @@ const Footer = () => {
             </ul>
             <div className="flex gap-4 mt-6">
               <a
-                href="#"
+                href="https://www.youtube.com/@khanbrothersengineeringsolutio"
                 className="bg-white/10 p-2 rounded-full hover:bg-secondary hover:text-white transition-colors"
               >
-                <Facebook className="h-4 w-4" />
+                <Youtube className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/khanbrother_sengsolution/"
                 className="bg-white/10 p-2 rounded-full hover:bg-secondary hover:text-white transition-colors"
               >
-                <Linkedin className="h-4 w-4" />
+                <Instagram className="h-4 w-4" />
               </a>
             </div>
           </div>

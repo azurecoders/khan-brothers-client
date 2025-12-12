@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client/react';
 import { CREATE_CONTACT } from '@/graphql/contacts';
 
 const COMPANY_INFO = {
-  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghusia Masjid, Karachi.',
+  address: 'Shop # 1, Plot# 1910, Ground Floor, Sector 6J1, Main Awan Road, Jonajo Town, Manzoor Colony, Near Ghausia Masjid, Karachi, Pakistan',
   phone: '+92 321 8980284',
   supportPhone: '+92 305 2498416',
   email: 'info@kbengsolutions.com',
